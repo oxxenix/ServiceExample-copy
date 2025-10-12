@@ -1,0 +1,60 @@
+name: Build and push Docker image
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
+env:
+  IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/serviceexample
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore ServiceExample/ServiceExample.csproj
+
+    - name: Build project
+      run: dotnet build ServiceExample/ServiceExample.csproj -c Release --no-restore
+
+    - name: Run tests
+      run: dotnet test --no-build --verbosity normal
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v3
+
+    - name: Set up Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Login to DockerHub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Build and push image
+      uses: docker/build-push-action@v6
+      with:
+        context: .
+        file: ./ServiceExample/Dockerfile
+        push: true
+        platforms: linux/amd64,linux/arm64
+        tags: |
+          ${{ env.IMAGE }}:latest
+          ${{ env.IMAGE }}:${{ github.sha }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+
+    - name: Summarize build info
+      run: echo "Build completed for ${{ env.IMAGE }}:${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+
