@@ -1,0 +1,77 @@
+{{- if .Values.redis.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "serviceexample.fullname" . }}-redis
+  namespace: {{ .Values.namespace.name }}
+  labels:
+    {{- include "serviceexample.labels" . | nindent 4 }}
+    component: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ include "serviceexample.name" . }}-redis
+  template:
+    metadata:
+      labels:
+        app: {{ include "serviceexample.name" . }}-redis
+    spec:
+      containers:
+        - name: redis
+          image: "{{ .Values.redis.image.repository }}:{{ .Values.redis.image.tag }}"
+          imagePullPolicy: {{ .Values.redis.image.pullPolicy }}
+          ports:
+            - name: redis
+              containerPort: 6379
+          args: ["--appendonly", "yes"]
+          resources:
+            {{- toYaml .Values.redis.resources | nindent 12 }}
+          volumeMounts:
+            - name: redis-storage
+              mountPath: /data
+      volumes:
+        - name: redis-storage
+          {{- if .Values.redis.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ include "serviceexample.fullname" . }}-redis-pvc
+          {{- else }}
+          emptyDir: {}
+          {{- end }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "serviceexample.fullname" . }}-redis
+  namespace: {{ .Values.namespace.name }}
+  labels:
+    {{- include "serviceexample.labels" . | nindent 4 }}
+    component: redis
+spec:
+  type: ClusterIP
+  ports:
+    - name: redis
+      port: 6379
+      targetPort: 6379
+  selector:
+    app: {{ include "serviceexample.name" . }}-redis
+---
+{{- if .Values.redis.persistence.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "serviceexample.fullname" . }}-redis-pvc
+  namespace: {{ .Values.namespace.name }}
+  labels:
+    {{- include "serviceexample.labels" . | nindent 4 }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.redis.persistence.size }}
+  {{- if .Values.redis.persistence.storageClass }}
+  storageClassName: {{ .Values.redis.persistence.storageClass }}
+  {{- end }}
+{{- end }}
+{{- end }}
