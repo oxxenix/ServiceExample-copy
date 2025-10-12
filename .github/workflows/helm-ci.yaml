@@ -1,0 +1,65 @@
+name: Helm Chart CI
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'charts/serviceexample/**'
+      - '.github/workflows/helm-ci.yaml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'charts/serviceexample/**'
+
+jobs:
+  lint:
+    name: Check Helm Chart
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v3
+        with:
+          version: v3.15.4
+
+      - name: Lint Helm chart
+        run:  helm lint charts/serviceexample
+
+      - name: Helm template validation
+        run:  helm template charts/serviceexample --debug > /dev/null  
+
+  package-and-publish:
+    name: Package & publish to GitHub pages
+    runs-on: ubuntu-latest
+    needs: lint
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v3
+      
+      - name: Package Helm Chart
+        run: |
+         cd charts/serviceexample
+         mkdir -p dist
+         helm package . --destination ./dist
+
+      - name: Create or update Helm repo index
+        run: |
+          cd charts/serviceexample/dist
+          helm repo index . --url https://oxxenix.github.io/ServiceExample/charts/serviceexample/dist
+
+      - name: Deploy Helm chart to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./charts/serviceexample/dist
+          keep_files: true
+          publish_branch: gh-pages
