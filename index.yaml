@@ -13,9 +13,9 @@ entries:
       artifacthub.io/license: MIT
     apiVersion: v2
     appVersion: 1.0.0
-    created: "2025-10-12T22:01:54.700631363Z"
+    created: "2025-10-12T22:13:28.789714568Z"
     description: A .NET 9 service using MongoDB, Redis and NATS.
-    digest: 1b66e8d50db44d68318eda11b4e82f2ba5c87fc933d966b4bf1e290334647998
+    digest: a01924d439d868376a47c23a5bf38b53284693f2ec7542a445545343c78ae85d
     home: https://github.com/oxxenix/ServiceExample-copy
     icon: https://raw.githubusercontent.com/oxxenix/ServiceExample-copy/main/logo.png
     keywords:
@@ -37,4 +37,4 @@ entries:
     urls:
     - https://oxxenix.github.io/ServiceExample/charts/serviceexample/dist/serviceexample-0.1.0.tgz
     version: 0.1.0
-generated: "2025-10-12T22:01:54.696937344Z"
+generated: "2025-10-12T22:13:28.787036288Z"
