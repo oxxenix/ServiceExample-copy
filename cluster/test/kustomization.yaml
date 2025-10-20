@@ -1,0 +1,8 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- flux-system
+- 00-crds.yaml
+- 01-infra-controllers.yaml
+- 02-infra-configs.yaml
+- apps.yaml
