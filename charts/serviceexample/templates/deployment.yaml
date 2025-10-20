@@ -38,6 +38,7 @@ spec:
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
+              targetPort: {{ .Values.service.targetPort }}
               protocol: TCP
           env:
             - name: ASPNETCORE_ENVIRONMENT
