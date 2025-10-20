@@ -9,11 +9,11 @@ entries:
         - Includes schema validation and OCI publishing metadata.
       artifacthub.io/images: |
         - name: serviceexample
-          image: ghcr.io/oxxenix/serviceexample:latest
+          image: ghcr.io/oxxenix/serviceexample:v0.1.1
       artifacthub.io/license: MIT
     apiVersion: v2
     appVersion: 1.0.0
-    created: "2025-10-20T19:59:36.416556202Z"
+    created: "2025-10-20T21:59:40.024798959Z"
     dependencies:
     - condition: mongodb.enabled
       name: mongodb
@@ -28,7 +28,7 @@ entries:
       repository: https://nats-io.github.io/k8s/helm/charts/
       version: 1.2.2
     description: A .NET 9 service using MongoDB, Redis and NATS.
-    digest: ccbc089964473e2da04ab461d3470cd662cb052a77448e780099f7eef7c1683c
+    digest: 640ee312783b94e75e6eebf7652241826a6bbd4a4edabd08d5c0f9aaa97ab382
     home: https://github.com/oxxenix/ServiceExample-copy
     icon: https://raw.githubusercontent.com/oxxenix/ServiceExample-copy/main/logo.png
     keywords:
@@ -40,7 +40,7 @@ entries:
     - kubernetes
     - helm
     maintainers:
-    - email: oksana.baranova@intel.com
+    - email: oxxenix@gmail.com
       name: oxxenix
       url: https://github.com/oxxenix
     name: serviceexample
@@ -48,6 +48,6 @@ entries:
     - https://github.com/oxxenix/ServiceExample-copy
     type: application
     urls:
-    - https://oxxenix.github.io/ServiceExample/charts/serviceexample/dist/serviceexample-0.1.0.tgz
-    version: 0.1.0
-generated: "2025-10-20T19:59:36.399219366Z"
+    - https://oxxenix.github.io/ServiceExample/charts/serviceexample/dist/serviceexample-0.1.1.tgz
+    version: 0.1.1
+generated: "2025-10-20T21:59:40.00594366Z"
