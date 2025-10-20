@@ -5,7 +5,7 @@ entries:
       artifacthub.io/category: application
       artifacthub.io/changes: |
         - Initial production-ready Helm chart for ServiceExample (.NET 9).
-        - Added support for MongoDB, Redis, and NATS subcharts.
+        - Added MongoDB, Redis, and NATS subcharts.
         - Includes schema validation and OCI publishing metadata.
       artifacthub.io/images: |
         - name: serviceexample
@@ -13,9 +13,22 @@ entries:
       artifacthub.io/license: MIT
     apiVersion: v2
     appVersion: 1.0.0
-    created: "2025-10-12T22:13:28.789714568Z"
+    created: "2025-10-20T18:47:42.845742233Z"
+    dependencies:
+    - condition: mongodb.enabled
+      name: mongodb
+      repository: https://charts.bitnami.com/bitnami
+      version: 15.6.0
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 19.4.0
+    - condition: nats.enabled
+      name: nats
+      repository: https://nats-io.github.io/k8s/helm/charts/
+      version: 1.2.2
     description: A .NET 9 service using MongoDB, Redis and NATS.
-    digest: a01924d439d868376a47c23a5bf38b53284693f2ec7542a445545343c78ae85d
+    digest: b2f547d227493ef3f149a7294812ae72452cdbd30e2bcd2a90311081cf47051a
     home: https://github.com/oxxenix/ServiceExample-copy
     icon: https://raw.githubusercontent.com/oxxenix/ServiceExample-copy/main/logo.png
     keywords:
@@ -37,4 +50,4 @@ entries:
     urls:
     - https://oxxenix.github.io/ServiceExample/charts/serviceexample/dist/serviceexample-0.1.0.tgz
     version: 0.1.0
-generated: "2025-10-12T22:13:28.787036288Z"
+generated: "2025-10-20T18:47:42.827553628Z"
