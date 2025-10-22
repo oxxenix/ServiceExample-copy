@@ -1,7 +1,10 @@
 image:
+  # repository: ghcr.io/oxxenix/serviceexample
+  # tag: v0.1.1
   repository: ebaroks/serviceexample
   tag: latest
   pullPolicy: IfNotPresent
+
 
 # imagePullSecrets: []
 
@@ -83,7 +86,7 @@ mongodb:
   persistence:
     enabled: true
     size: 10Gi
-    storageClass: hcloud-volumes
+    storageClass: longhorn
   auth:
     enabled: false
 
@@ -99,7 +102,7 @@ redis:
   persistence:
     enabled: true
     size: 10Gi
-    storageClass: hcloud-volumes
+    storageClass: longhorn
 
 # NATS
 nats:
@@ -113,4 +116,4 @@ nats:
   persistence:
     enabled: true
     size: 10Gi
-    storageClass: hcloud-volumes
+    storageClass: longhorn

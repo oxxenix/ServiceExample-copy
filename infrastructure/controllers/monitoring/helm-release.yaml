@@ -1,0 +1,196 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: victoria-metrics-operator
+  namespace: victoria-metrics-operator
+spec:
+  chart:
+    spec:
+      chart: victoria-metrics-operator
+      sourceRef:
+        kind: HelmRepository
+        name: vm
+      version: '*'
+  interval: 1m0s
+  values:
+    crd:
+      create: false
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: victoria-metrics-k8s-stack
+  namespace: monitoring-system
+spec:
+  chart:
+    spec:
+      chart: victoria-metrics-k8s-stack
+      sourceRef:
+        kind: HelmRepository
+        name: vm
+      version: '*'
+  interval: 1m0s
+  values:
+    kube-state-metrics:
+      enabled: true
+      extraArgs:
+      - --metric-labels-allowlist=pods=[*]
+    victoria-metrics-operator:
+      enabled: false
+    vmsingle:
+      enabled: true
+      spec:
+        storage:
+          storageClassName: longhorn
+      ingress:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-http01-nginx-issuer
+        hosts:
+        - vmsingle.dev.portsight.ai
+        tls:
+        - secretName: vmsingle-ingress-tls
+          hosts:
+          - vmsingle.dev.portsight.ai
+    vmagent:
+      enabled: true
+      rbac:
+        create: true
+        annotations: {}
+        extraLabels: {}
+        namespaced: false
+      ingress:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-http01-nginx-issuer
+        hosts:
+        - vmagent.dev.portsight.ai
+        tls:
+        - secretName: vmagent-ingress-tls
+          hosts:
+          - vmagent.dev.portsight.ai
+    vmalert:
+      ingress:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-http01-nginx-issuer
+        hosts:
+        - vmalert.dev.portsight.ai
+        tls:
+        - secretName: vmalert-ingress-tls
+          hosts:
+          - vmalert.dev.portsight.ai
+    vmcluster:
+      enabled: false
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: victoria-logs-single
+  namespace: monitoring-system
+spec:
+  interval: 1h
+  chart:
+    spec:
+      chart: victoria-logs-single
+      version: '*'
+      sourceRef:
+        name: vm
+        kind: HelmRepository
+  values:
+    fluent-bit:
+      enabled: true
+    server:
+      ingress:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-http01-nginx-issuer
+        hosts:
+        - name: victoria-logs.dev.portsight.ai
+          path: /
+        tls:
+        - secretName: victoria-logs-ingress-tls
+          hosts:
+          - victoria-logs.dev.portsight.ai
+---
+
+---
+apiVersion: helm.toolkit.fluxcd.io/v2 
+kind: HelmRelease
+metadata:
+  name: grafana
+  namespace: grafana
+spec:
+  chart:
+    spec:
+      chart: grafana
+      sourceRef:
+        kind: HelmRepository
+        name: grafana
+      version: '*'
+  interval: 1m0s
+  values:
+    sidecar:
+      datasources:
+        enabled: true
+        # -- List of default prometheus compatible datasource configurations.
+        # VM `url` will be added to each of them in templates and `type` will be set to defaultDatasourceType if not defined
+        default:
+          - name: VictoriaMetrics
+            isDefault: true
+          - name: VictoriaMetrics (DS)
+            isDefault: false
+            type: victoriametrics-datasource
+        initDatasources: true
+        createVMReplicasDatasources: false
+        searchNamespace: ALL
+      dashboards:
+        provider:
+          name: default
+          orgid: 1
+        additionalDashboardLabels: {}
+        folder: /var/lib/grafana/dashboards
+        defaultFolderName: default
+        additionalDashboardAnnotations: {}
+        enabled: true
+        multicluster: false
+        searchNamespace: ALL
+
+    # -- Create datasource configmap even if grafana deployment has been disabled
+    forceDeployDatasource: false
+
+    datasources:
+      datasources.yaml:
+        apiVersion: 1
+        datasources:
+        - name: VictoriaLogs
+          type: victorialogs-datasource
+          access: proxy
+          url: http://victoria-logs-single-server.monitoring-system.svc.cluster.local:9428
+
+    defaultDashboardsTimezone: utc
+
+    plugins:
+    - victoriametrics-metrics-datasource
+    - victoriametrics-logs-datasource
+    
+    defaultDatasourceType: "prometheus"
+
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-http01-nginx-issuer
+      path: /
+      pathType: Prefix
+      hosts:
+        - grafana.80-90-186-67.sslip.io
+      tls:
+      - secretName: grafana-ingress-tls
+        hosts:
+          - victoria-logs.80-90-186-67.sslip.io

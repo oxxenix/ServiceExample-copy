@@ -1,0 +1,8 @@
+metrics:
+  serviceMonitor:
+    enabled: false
+controller:
+  hcloudToken:
+    existingSecret:
+      name: hcloud
+      key: token
