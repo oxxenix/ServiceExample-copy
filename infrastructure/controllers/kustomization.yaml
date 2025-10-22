@@ -3,4 +3,5 @@ kind: Kustomization
 resources:
 - csi-driver
 - local-path-provisioner
-
+- longhorn
+- monitoring
