@@ -6,3 +6,4 @@ resources:
 - 01-infra-controllers.yaml
 - 02-infra-configs.yaml
 - apps.yaml
+- namespaces.yaml
