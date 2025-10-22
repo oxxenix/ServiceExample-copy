@@ -2,7 +2,7 @@ apiVersion: v2
 name: serviceexample
 description: A .NET 9 service using MongoDB, Redis and NATS.
 type: application
-version: 0.1.0
+version: 0.1.1
 appVersion: "1.0.0"
 
 dependencies:
@@ -30,7 +30,7 @@ keywords: [dotnet, mongodb, redis, nats, aspire, kubernetes, helm]
 
 maintainers:
   - name: oxxenix
-    email: oksana.baranova@intel.com
+    email: oxxenix@gmail.com
     url: https://github.com/oxxenix
 
 annotations:
@@ -41,5 +41,5 @@ annotations:
     - Includes schema validation and OCI publishing metadata.
   artifacthub.io/images: |
     - name: serviceexample
-      image: ghcr.io/oxxenix/serviceexample:latest
+      image: ghcr.io/oxxenix/serviceexample:v0.1.1
   artifacthub.io/category: application

@@ -1,7 +1,8 @@
 image:
-  repository: ebaroks/serviceexample
-  tag: latest
+  repository: ghcr.io/oxxenix/serviceexample
+  tag: v0.1.1
   pullPolicy: IfNotPresent
+
 
 # imagePullSecrets: []
 

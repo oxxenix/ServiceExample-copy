@@ -2,12 +2,12 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: serviceexample
+  namespace: serviceexample
 spec:
   releaseName: serviceexample
-  targetNamespace: serviceexample
   chart:
     spec:
-      chart: charts/serviceexample
+      chart: ./charts/serviceexample
       sourceRef:
         kind: GitRepository
         name: flux-system
