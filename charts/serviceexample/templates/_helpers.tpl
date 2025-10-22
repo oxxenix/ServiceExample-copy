@@ -17,7 +17,7 @@ Ensures uniqueness across namespaces
 Standard Helm labels
 */}}
 {{- define "serviceexample.labels" -}}
-helm.sh/chart: {{ include "serviceexample.name" . }}-{{ .Chart.Version }}
+helm.sh/chart: {{ include "serviceexample.name" . }}-{{ regexReplaceAll "[^A-Za-z0-9_.-]" .Chart.Version "-" }}
 app.kubernetes.io/name: {{ include "serviceexample.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/version: {{ .Chart.AppVersion }}

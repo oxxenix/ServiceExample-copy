@@ -1,0 +1,3 @@
+persistence:
+  defaultClass: false
+  defaultClassReplicaCount: 1

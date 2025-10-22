@@ -1,18 +1,15 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: serviceexample
-  namespace: serviceexample
+  name: local-path-provisioner
 spec:
-  releaseName: serviceexample
+  releaseName: local-path-provisioner
   chart:
     spec:
-      reconcileStrategy: Revision
-      chart: ./charts/serviceexample
+      chart: ./deploy/chart/local-path-provisioner
       sourceRef:
         kind: GitRepository
-        name: flux-system
-        namespace: flux-system
+        name: local-path-provisioner
   interval: 15m
   timeout: 5m
   install:
@@ -25,4 +22,4 @@ spec:
       retries: 3
   # valuesFrom:
   # - kind: ConfigMap
-  #   name: values-serviceexample
+  #   name: values-hcloud-csi

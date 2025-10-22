@@ -1,18 +1,15 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: serviceexample
-  namespace: serviceexample
+  name: longhorn
 spec:
-  releaseName: serviceexample
+  releaseName: longhorn
   chart:
     spec:
-      reconcileStrategy: Revision
-      chart: ./charts/serviceexample
+      chart: longhorn
       sourceRef:
-        kind: GitRepository
-        name: flux-system
-        namespace: flux-system
+        kind: HelmRepository
+        name: longhorn
   interval: 15m
   timeout: 5m
   install:
@@ -25,4 +22,4 @@ spec:
       retries: 3
   # valuesFrom:
   # - kind: ConfigMap
-  #   name: values-serviceexample
+  #   name: values-hcloud-csi
