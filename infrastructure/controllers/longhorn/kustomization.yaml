@@ -6,3 +6,7 @@ resources:
 namespace: longhorn-system
 configurations:
 - kustomizeconfig.yaml
+configMapGenerator:
+- name: values-longhorn
+  files:
+  - values.yaml=values-public.yaml
