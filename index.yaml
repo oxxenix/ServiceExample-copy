@@ -17,7 +17,7 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 7.0.9
-    created: "2025-10-22T21:05:41.701968797Z"
+    created: "2025-10-22T21:06:17.728492572Z"
     dependencies:
     - name: common
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -49,7 +49,7 @@ entries:
   nats:
   - apiVersion: v2
     appVersion: 2.10.18
-    created: "2025-10-22T21:05:41.703546653Z"
+    created: "2025-10-22T21:06:17.730025067Z"
     description: A Helm chart for the NATS.io High Speed Cloud Native Distributed
       Communications Technology.
     digest: 8b66f4656aaa330aaee992eff66f912dfbc7aefd60bb65d0114d5723a5858c7e
@@ -84,7 +84,7 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 7.2.5
-    created: "2025-10-22T21:05:41.708377753Z"
+    created: "2025-10-22T21:06:17.735999122Z"
     dependencies:
     - name: common
       repository: oci://registry-1.docker.io/bitnamicharts
@@ -122,7 +122,7 @@ entries:
       artifacthub.io/license: MIT
     apiVersion: v2
     appVersion: 1.0.0
-    created: "2025-10-22T21:05:41.695781063Z"
+    created: "2025-10-22T21:06:17.722389613Z"
     dependencies:
     - condition: mongodb.enabled
       name: mongodb
@@ -137,7 +137,7 @@ entries:
       repository: https://nats-io.github.io/k8s/helm/charts/
       version: 1.2.2
     description: A .NET 9 service using MongoDB, Redis and NATS.
-    digest: 3097c4f26c21cbb1819d304ccdf79292ca7b48446cb8aa2733ac616d6c080847
+    digest: 38ef5b4841e5289332fb767fe406f07ef17996620cee0f6648fd516beb46c538
     home: https://github.com/oxxenix/ServiceExample-copy
     icon: https://raw.githubusercontent.com/oxxenix/ServiceExample-copy/main/logo.png
     keywords:
@@ -159,4 +159,4 @@ entries:
     urls:
     - https://oxxenix.github.io/ServiceExample-copy/charts/serviceexample-v0.1.1.tgz
     version: v0.1.1
-generated: "2025-10-22T21:05:41.679603312Z"
+generated: "2025-10-22T21:06:17.706044817Z"
