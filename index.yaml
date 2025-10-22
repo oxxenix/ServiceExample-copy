@@ -8,11 +8,11 @@ entries:
         - Added MongoDB, Redis, and NATS subcharts.
         - Includes schema validation and OCI publishing metadata.
       artifacthub.io/images: |
-        image: ebaroks/serviceexample:latest
+        - name: serviceexample
       artifacthub.io/license: MIT
     apiVersion: v2
     appVersion: 1.0.0
-    created: "2025-10-22T20:05:56.430795319Z"
+    created: "2025-10-22T20:31:02.953241445Z"
     dependencies:
     - condition: mongodb.enabled
       name: mongodb
@@ -27,7 +27,7 @@ entries:
       repository: https://nats-io.github.io/k8s/helm/charts/
       version: 1.2.2
     description: A .NET 9 service using MongoDB, Redis and NATS.
-    digest: f683ca64e7384fc0a057f00384f92fa2dadaa3c47b6eeaeb7485ada680fc39af
+    digest: 0561603d6f64742e7f32d17cdadc99bbe2794bb21a6d6b4b06c04113bb0fe089
     home: https://github.com/oxxenix/ServiceExample-copy
     icon: https://raw.githubusercontent.com/oxxenix/ServiceExample-copy/main/logo.png
     keywords:
@@ -47,6 +47,6 @@ entries:
     - https://github.com/oxxenix/ServiceExample-copy
     type: application
     urls:
-    - https://oxxenix.github.io/ServiceExample/charts/serviceexample/dist/serviceexample-v0.1.1.tgz
+    - https://oxxenix.github.io/ServiceExample-copy/charts/serviceexample-v0.1.1.tgz
     version: v0.1.1
-generated: "2025-10-22T20:05:56.411685163Z"
+generated: "2025-10-22T20:31:02.934322849Z"
