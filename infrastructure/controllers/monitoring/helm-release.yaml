@@ -42,7 +42,7 @@ spec:
       enabled: true
       spec:
         storage:
-          storageClassName: standard-rwo
+          storageClassName: longhorn
       ingress:
         enabled: true
         ingressClassName: nginx

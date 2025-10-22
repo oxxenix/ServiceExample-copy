@@ -20,6 +20,6 @@ spec:
     crds: Skip
     remediation:
       retries: 3
-  # valuesFrom:
-  # - kind: ConfigMap
-  #   name: values-hcloud-csi
+  valuesFrom:
+  - kind: ConfigMap
+    name: values-longhorn

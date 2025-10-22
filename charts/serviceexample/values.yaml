@@ -86,7 +86,7 @@ mongodb:
   persistence:
     enabled: true
     size: 10Gi
-    storageClass: hcloud-volumes
+    storageClass: longhorn
   auth:
     enabled: false
 
@@ -102,7 +102,7 @@ redis:
   persistence:
     enabled: true
     size: 10Gi
-    storageClass: hcloud-volumes
+    storageClass: longhorn
 
 # NATS
 nats:
@@ -116,4 +116,4 @@ nats:
   persistence:
     enabled: true
     size: 10Gi
-    storageClass: hcloud-volumes
+    storageClass: longhorn

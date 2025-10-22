@@ -2,7 +2,7 @@ apiVersion: v2
 name: serviceexample
 description: A .NET 9 service using MongoDB, Redis and NATS.
 type: application
-version: 0.1.1
+version: v0.1.1
 appVersion: "1.0.0"
 
 dependencies:
@@ -40,6 +40,5 @@ annotations:
     - Added MongoDB, Redis, and NATS subcharts.
     - Includes schema validation and OCI publishing metadata.
   artifacthub.io/images: |
-    - name: serviceexample
-      image: ghcr.io/oxxenix/serviceexample:v0.1.1
+      image: ebaroks/serviceexample:latest
   artifacthub.io/category: application
