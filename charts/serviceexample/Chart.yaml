@@ -40,6 +40,5 @@ annotations:
     - Added MongoDB, Redis, and NATS subcharts.
     - Includes schema validation and OCI publishing metadata.
   artifacthub.io/images: |
-    - name: serviceexample
       image: ebaroks/serviceexample:latest
   artifacthub.io/category: application
