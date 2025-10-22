@@ -1,0 +1,119 @@
+image:
+  # repository: ghcr.io/oxxenix/serviceexample
+  # tag: v0.1.1
+  repository: ebaroks/serviceexample
+  tag: latest
+  pullPolicy: IfNotPresent
+
+
+# imagePullSecrets: []
+
+replicaCount: 1
+
+namespace:
+  name: serviceexample
+  create: true
+
+service:
+  type: ClusterIP
+  port: 9080
+  targetPort: 9080
+  annotations: {}
+
+serviceAccount:
+  create: true
+  name: serviceexample
+  annotations: {}
+  automount: true
+
+env:
+  ASPNETCORE_ENVIRONMENT: "Production"
+  ASPNETCORE_URLS: "http://+:9080"
+  Aspire__MongoDB__Driver__ConnectionString: "mongodb://serviceexample-mongodb:27017"
+  Aspire__StackExchange__Redis__ConnectionString: "serviceexample-redis-master:6379"
+  Aspire__NATS__Net__ConnectionString: "nats://serviceexample-nats:4222"
+
+# livenessProbe:
+#   httpGet:
+#     path: /
+#     port: 9080
+#   initialDelaySeconds: 90
+#   periodSeconds: 30
+#   timeoutSeconds: 10
+
+# readinessProbe:
+#   httpGet:
+#     path: /
+#     port: 9080
+#   initialDelaySeconds: 120
+#   periodSeconds: 10
+#   timeoutSeconds: 5
+
+resources:
+  requests:
+    cpu: 250m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+securityContext:
+  enabled: true
+  runAsNonRoot: true
+  runAsUser: 10000
+
+podAnnotations: {}
+podLabels: {}
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+# Multi-arch env
+archSelector:
+  enabled: false
+  arch: amd64
+
+
+# MongoDB
+mongodb:
+  enabled: true
+  image:
+    registry: docker.io
+    repository: bitnamilegacy/mongodb
+    tag: 8.0.13-debian-12-r0
+    pullPolicy: IfNotPresent
+  persistence:
+    enabled: true
+    size: 10Gi
+    storageClass: longhorn
+  auth:
+    enabled: false
+
+
+# Redis
+redis:
+  enabled: true
+  image:
+    registry: docker.io
+    repository: bitnamilegacy/redis
+    tag: 8.2.1-debian-12-r0
+    pullPolicy: IfNotPresent
+  persistence:
+    enabled: true
+    size: 10Gi
+    storageClass: longhorn
+
+# NATS
+nats:
+  enabled: true
+  image:
+    repository: nats
+    tag: latest
+    pullPolicy: IfNotPresent
+  service:
+    port: 4222
+  persistence:
+    enabled: true
+    size: 10Gi
+    storageClass: longhorn
