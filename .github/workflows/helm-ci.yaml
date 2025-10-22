@@ -10,6 +10,7 @@ on:
     branches: [ main ]
     paths:
       - 'charts/serviceexample/**'
+      - '.github/workflows/helm-ci.yaml'
 
 jobs:
   lint:
@@ -44,22 +45,19 @@ jobs:
 
       - name: Set up Helm
         uses: azure/setup-helm@v3
-      
+
       - name: Package Helm Chart
         run: |
-         cd charts/serviceexample
-         mkdir -p dist
-         helm package . --destination ./dist
-
-      - name: Create or update Helm repo index
-        run: |
-          cd charts/serviceexample/dist
-          helm repo index . --url https://oxxenix.github.io/ServiceExample/charts/serviceexample/dist
+          mkdir -p ./gh-pages
+          helm package charts/serviceexample --destination ./gh-pages
+          helm repo index ./gh-pages --url https://oxxenix.github.io/ServiceExample-copy
 
       - name: Deploy Helm chart to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./charts/serviceexample/dist
-          keep_files: true
+          publish_dir: ./gh-pages
           publish_branch: gh-pages
+          keep_files: false
+
+  

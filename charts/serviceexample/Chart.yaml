@@ -2,7 +2,7 @@ apiVersion: v2
 name: serviceexample
 description: A .NET 9 service using MongoDB, Redis and NATS.
 type: application
-version: v0.1.1
+version: v0.1.2
 appVersion: "1.0.0"
 
 dependencies:
@@ -21,7 +21,6 @@ dependencies:
     repository: https://nats-io.github.io/k8s/helm/charts/
     condition: nats.enabled
 
-icon: https://raw.githubusercontent.com/oxxenix/ServiceExample-copy/main/logo.png
 
 home: https://github.com/oxxenix/ServiceExample-copy
 sources:
@@ -32,13 +31,3 @@ maintainers:
   - name: oxxenix
     email: oxxenix@gmail.com
     url: https://github.com/oxxenix
-
-annotations:
-  artifacthub.io/license: MIT
-  artifacthub.io/changes: |
-    - Initial production-ready Helm chart for ServiceExample (.NET 9).
-    - Added MongoDB, Redis, and NATS subcharts.
-    - Includes schema validation and OCI publishing metadata.
-  artifacthub.io/images: |
-      image: ebaroks/serviceexample:latest
-  artifacthub.io/category: application

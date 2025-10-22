@@ -1,0 +1,163 @@
+apiVersion: v1
+entries:
+  mongodb:
+  - annotations:
+      category: Database
+      images: |
+        - name: kubectl
+          image: docker.io/bitnami/kubectl:1.30.1-debian-12-r0
+        - name: mongodb
+          image: docker.io/bitnami/mongodb:7.0.9-debian-12-r4
+        - name: mongodb-exporter
+          image: docker.io/bitnami/mongodb-exporter:0.40.0-debian-12-r29
+        - name: nginx
+          image: docker.io/bitnami/nginx:1.26.0-debian-12-r1
+        - name: os-shell
+          image: docker.io/bitnami/os-shell:12-debian-12-r21
+      licenses: Apache-2.0
+    apiVersion: v2
+    appVersion: 7.0.9
+    created: "2025-10-22T23:18:15.459163+03:00"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/bitnamicharts
+      tags:
+      - bitnami-common
+      version: 2.x.x
+    description: MongoDB(R) is a relational open source NoSQL database. Easy to use,
+      it stores data in JSON-like documents. Automated scalability and high-performance.
+      Ideal for developing cloud native applications.
+    digest: e4e8c3df753f9f998c39da01b7244f5aa663643e9c9ff81d97fb4ed14cf0bc03
+    home: https://bitnami.com
+    icon: https://bitnami.com/assets/stacks/mongodb/img/mongodb-stack-220x234.png
+    keywords:
+    - mongodb
+    - database
+    - nosql
+    - cluster
+    - replicaset
+    - replication
+    maintainers:
+    - name: Broadcom, Inc. All Rights Reserved.
+      url: https://github.com/bitnami/charts
+    name: mongodb
+    sources:
+    - https://github.com/bitnami/charts/tree/main/bitnami/mongodb
+    urls:
+    - https://oxxenix.github.io/ServiceExample/charts/serviceexample/dist/charts/mongodb-15.6.0.tgz
+    version: 15.6.0
+  nats:
+  - apiVersion: v2
+    appVersion: 2.10.18
+    created: "2025-10-22T23:18:15.460311+03:00"
+    description: A Helm chart for the NATS.io High Speed Cloud Native Distributed
+      Communications Technology.
+    digest: 8b66f4656aaa330aaee992eff66f912dfbc7aefd60bb65d0114d5723a5858c7e
+    home: http://github.com/nats-io/k8s
+    icon: https://nats.io/img/nats-icon-color.png
+    keywords:
+    - nats
+    - messaging
+    - cncf
+    maintainers:
+    - email: info@nats.io
+      name: The NATS Authors
+      url: https://github.com/nats-io
+    name: nats
+    urls:
+    - https://oxxenix.github.io/ServiceExample/charts/serviceexample/dist/charts/nats-1.2.2.tgz
+    version: 1.2.2
+  redis:
+  - annotations:
+      category: Database
+      images: |
+        - name: kubectl
+          image: docker.io/bitnami/kubectl:1.30.1-debian-12-r0
+        - name: os-shell
+          image: docker.io/bitnami/os-shell:12-debian-12-r21
+        - name: redis
+          image: docker.io/bitnami/redis:7.2.5-debian-12-r0
+        - name: redis-exporter
+          image: docker.io/bitnami/redis-exporter:1.59.0-debian-12-r6
+        - name: redis-sentinel
+          image: docker.io/bitnami/redis-sentinel:7.2.5-debian-12-r0
+      licenses: Apache-2.0
+    apiVersion: v2
+    appVersion: 7.2.5
+    created: "2025-10-22T23:18:15.463401+03:00"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/bitnamicharts
+      tags:
+      - bitnami-common
+      version: 2.x.x
+    description: Redis(R) is an open source, advanced key-value store. It is often
+      referred to as a data structure server since keys can contain strings, hashes,
+      lists, sets and sorted sets.
+    digest: b926b5b14eb8f4d3ffff05eda3beda728255a29e2944cfd6ce04afa072b1d6e2
+    home: https://bitnami.com
+    icon: https://bitnami.com/assets/stacks/redis/img/redis-stack-220x234.png
+    keywords:
+    - redis
+    - keyvalue
+    - database
+    maintainers:
+    - name: Broadcom, Inc. All Rights Reserved.
+      url: https://github.com/bitnami/charts
+    name: redis
+    sources:
+    - https://github.com/bitnami/charts/tree/main/bitnami/redis
+    urls:
+    - https://oxxenix.github.io/ServiceExample/charts/serviceexample/dist/charts/redis-19.4.0.tgz
+    version: 19.4.0
+  serviceexample:
+  - annotations:
+      artifacthub.io/category: application
+      artifacthub.io/changes: |
+        - Initial production-ready Helm chart for ServiceExample (.NET 9).
+        - Added MongoDB, Redis, and NATS subcharts.
+        - Includes schema validation and OCI publishing metadata.
+      artifacthub.io/images: |
+        - name: serviceexample
+          image: ghcr.io/oxxenix/serviceexample:v0.1.1
+      artifacthub.io/license: MIT
+    apiVersion: v2
+    appVersion: 1.0.0
+    created: "2025-10-22T23:18:15.456101+03:00"
+    dependencies:
+    - condition: mongodb.enabled
+      name: mongodb
+      repository: https://charts.bitnami.com/bitnami
+      version: 15.6.0
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 19.4.0
+    - condition: nats.enabled
+      name: nats
+      repository: https://nats-io.github.io/k8s/helm/charts/
+      version: 1.2.2
+    description: A .NET 9 service using MongoDB, Redis and NATS.
+    digest: b1dd4c286b914f41dc69fe1f299b32fad437389542915afc7f9b49c74d8f164b
+    home: https://github.com/oxxenix/ServiceExample-copy
+    icon: https://raw.githubusercontent.com/oxxenix/ServiceExample-copy/main/logo.png
+    keywords:
+    - dotnet
+    - mongodb
+    - redis
+    - nats
+    - aspire
+    - kubernetes
+    - helm
+    maintainers:
+    - email: oxxenix@gmail.com
+      name: oxxenix
+      url: https://github.com/oxxenix
+    name: serviceexample
+    sources:
+    - https://github.com/oxxenix/ServiceExample-copy
+    type: application
+    urls:
+    - https://oxxenix.github.io/ServiceExample/charts/serviceexample/dist/serviceexample-v0.1.1.tgz
+    version: v0.1.1
+generated: "2025-10-22T23:18:15.446192+03:00"
