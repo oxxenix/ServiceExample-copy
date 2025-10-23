@@ -1,18 +1,9 @@
 apiVersion: v1
 entries:
   serviceexample:
-  - annotations:
-      artifacthub.io/category: application
-      artifacthub.io/changes: |
-        - Initial production-ready Helm chart for ServiceExample (.NET 9).
-        - Added MongoDB, Redis, and NATS subcharts.
-        - Includes schema validation and OCI publishing metadata.
-      artifacthub.io/images: |
-        - name: serviceexample
-      artifacthub.io/license: MIT
-    apiVersion: v2
+  - apiVersion: v2
     appVersion: 1.0.0
-    created: "2025-10-23T19:16:46.712113588Z"
+    created: "2025-10-23T19:23:44.058690931Z"
     dependencies:
     - condition: mongodb.enabled
       name: mongodb
@@ -27,7 +18,7 @@ entries:
       repository: https://nats-io.github.io/k8s/helm/charts/
       version: 1.2.2
     description: A .NET 9 service using MongoDB, Redis and NATS.
-    digest: 1eb18680c962848dcab6b468ccdb86a89f25fb338c972079a575d1e694edc117
+    digest: dd46c0831f78cad5c41c4e56563b29188c118608821a1f964b16b65946d0ac35
     home: https://github.com/oxxenix/ServiceExample-copy
     keywords:
     - dotnet
@@ -46,6 +37,6 @@ entries:
     - https://github.com/oxxenix/ServiceExample-copy
     type: application
     urls:
-    - https://oxxenix.github.io/ServiceExample-copy/serviceexample-v0.1.1.tgz
-    version: v0.1.1
-generated: "2025-10-23T19:16:46.697088965Z"
+    - https://oxxenix.github.io/ServiceExample-copy/serviceexample-v0.1.2.tgz
+    version: v0.1.2
+generated: "2025-10-23T19:23:44.042378403Z"
