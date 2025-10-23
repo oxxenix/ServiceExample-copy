@@ -12,7 +12,7 @@ entries:
       artifacthub.io/license: MIT
     apiVersion: v2
     appVersion: 1.0.0
-    created: "2025-10-23T17:56:27.234630687Z"
+    created: "2025-10-23T18:41:19.706463024Z"
     dependencies:
     - condition: mongodb.enabled
       name: mongodb
@@ -27,7 +27,7 @@ entries:
       repository: https://nats-io.github.io/k8s/helm/charts/
       version: 1.2.2
     description: A .NET 9 service using MongoDB, Redis and NATS.
-    digest: 0fbb1d71ac4489bd5fd1f20965c77f4893473c6c1e34efb550d5b07286d9bb57
+    digest: d61117a69ae1e64f7225ee0d8fdf8541211596322d89e4045ae5bb219f866db4
     home: https://github.com/oxxenix/ServiceExample-copy
     keywords:
     - dotnet
@@ -48,4 +48,4 @@ entries:
     urls:
     - https://oxxenix.github.io/ServiceExample-copy/serviceexample-v0.1.1.tgz
     version: v0.1.1
-generated: "2025-10-23T17:56:27.218380028Z"
+generated: "2025-10-23T18:41:19.690772566Z"
