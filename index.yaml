@@ -3,7 +3,7 @@ entries:
   serviceexample:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2025-10-23T19:28:35.086816419Z"
+    created: "2025-10-23T19:33:18.700419534Z"
     dependencies:
     - condition: mongodb.enabled
       name: mongodb
@@ -18,7 +18,7 @@ entries:
       repository: https://nats-io.github.io/k8s/helm/charts/
       version: 1.2.2
     description: A .NET 9 service using MongoDB, Redis and NATS.
-    digest: 4468833dd0663eaff84e7fdaa50ec30c910dcbde7cb79bc85f0cc6cd494e8c16
+    digest: f36112ad511bf0a3b923084a2dbf49ef2e52e267e51ff54c02c61c5df961b8bf
     home: https://github.com/oxxenix/ServiceExample-copy
     keywords:
     - dotnet
@@ -39,4 +39,4 @@ entries:
     urls:
     - https://oxxenix.github.io/ServiceExample-copy/serviceexample-v0.1.2.tgz
     version: v0.1.2
-generated: "2025-10-23T19:28:35.071482396Z"
+generated: "2025-10-23T19:33:18.684281648Z"
