@@ -5,3 +5,5 @@ resources:
 - local-path-provisioner
 - longhorn
 - monitoring
+- sealed-secrets
+# - ngrok-operator
